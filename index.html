@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+
+  <title>تطبيق آيات</title>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet"
+    href="style.css" />
+
+  <!-- Icons -->
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+</head>
+
+<body>
+
+  <!-- Splash -->
+
+  <div id="splash-screen"
+    class="splash-container">
+
+    <div class="splash-content">
+
+      <i class="fa-solid fa-moon crescent-large"></i>
+
+      <h1 class="splash-title">
+        تطبيق آيات
+      </h1>
+
+      <p class="splash-subtitle">
+        رحلة إيمانية في عالم القرآن الكريم
+      </p>
+
+      <button class="enter-btn"
+        onclick="startApp()">
+
+        <i class="fa-solid fa-book-quran"></i>
+
+        دخول التطبيق
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Sidebar -->
+
+  <nav id="sidebar"
+    class="sidebar-menu close">
+
+    <div class="sidebar-header">
+
+      <h3>
+        القائمة
+      </h3>
+
+      <span class="close-sidebar-btn"
+        onclick="toggleSidebar()">
+
+        &times;
+
+      </span>
+
+    </div>
+
+    <ul class="sidebar-links">
+
+      <li>
+
+        <a href="#"
+          onclick="showSection('home-dashboard')">
+
+          <i class="fa-solid fa-house"></i>
+
+          الرئيسية
+
+        </a>
+
+      </li>
+
+      <li>
+
+        <a href="#"
+          onclick="openDeveloperPage()">
+
+          <i class="fa-solid fa-code"></i>
+
+          المطور
+
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <div id="sidebar-overlay"
+    class="hidden"
+    onclick="toggleSidebar()"></div>
+
+  <!-- التطبيق -->
+
+  <div id="app-content"
+    class="main-app-layout hidden">
+
+    <!-- Navbar -->
+
+    <div class="top-navbar">
+
+      <button class="menu-trigger-btn"
+        onclick="toggleSidebar()">
+
+        <i class="fa-solid fa-bars"></i>
+
+      </button>
+
+      <div class="nav-brand">
+        تطبيق آيات
+      </div>
+
+      <div style="width:40px;"></div>
+
+    </div>
+
+    <!-- الرئيسية -->
+
+    <div id="home-dashboard"
+      class="dashboard-view">
+
+      <div class="hero-card">
+
+        <div class="hero-content">
+
+          <div>
+
+            <h1>
+              أهلاً بك في تطبيق آيات
+            </h1>
+
+            <p>
+              القرآن الكريم بين يديك
+            </p>
+
+          </div>
+
+          <i class="fa-solid fa-book-quran hero-icon"></i>
+
+        </div>
+
+      </div>
+
+      <!-- التقويم -->
+
+      <div class="calendar-card">
+
+        <div class="calendar-icon">
+
+          <i class="fa-solid fa-calendar-days"></i>
+
+        </div>
+
+        <div>
+
+          <h3>
+            التاريخ الهجري
+          </h3>
+
+          <p id="hijri-date">
+            جاري التحميل...
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- زر التلاوة -->
+
+      <div class="services-grid">
+
+        <div class="service-card"
+          onclick="showSection('quran-section')">
+
+          <div class="service-icon">
+
+            <i class="fa-solid fa-book-open-reader"></i>
+
+          </div>
+
+          <h3>
+            تلاوة القرآن الكريم
+          </h3>
+
+          <p>
+            قراءة واستماع السور المباركة
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- قسم القرآن -->
+
+    <div id="quran-section"
+      class="dashboard-view hidden">
+
+      <!-- أزرار العودة -->
+
+      <div class="top-actions">
+
+        <button class="back-btn"
+          onclick="backToHome()">
+
+          <i class="fa-solid fa-house"></i>
+
+          الرئيسية
+
+        </button>
+
+        <button class="back-btn"
+          onclick="backToList()">
+
+          <i class="fa-solid fa-list"></i>
+
+          السور
+
+        </button>
+
+      </div>
+
+      <!-- الفهرس -->
+
+      <div id="surah-selector-panel"
+        class="surah-selector-panel">
+
+        <h3>
+
+          <i class="fa-solid fa-book"></i>
+
+          فهرس السور
+
+        </h3>
+
+        <!-- البحث -->
+
+        <div class="search-box">
+
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input type="text"
+            id="surah-search"
+            placeholder="ابحث عن سورة..." />
+
+        </div>
+
+        <!-- السور -->
+
+        <div id="surah-grid-container"
+          class="surah-grid"></div>
+
+      </div>
+
+      <!-- القراءة -->
+
+      <div id="reading-zone"
+        class="reading-area hidden">
+
+        <!-- القارئ -->
+
+        <div class="reader-select-box">
+
+          <label>
+
+            <i class="fa-solid fa-microphone"></i>
+
+            اختر القارئ
+
+          </label>
+
+          <select id="reader-select">
+
+            <option value="ar.alafasy">
+              مشاري العفاسي
+            </option>
+
+            <option value="ar.abdulbasitmurattal">
+              عبد الباسط عبد الصمد
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- المشغل -->
+
+        <div class="audio-player-box">
+
+          <audio id="quran-audio"
+            controls></audio>
+
+        </div>
+
+        <!-- المصحف -->
+
+        <div class="quran-book-container">
+
+          <div id="surah-title"
+            class="surah-title"></div>
+
+          <div id="surah-text"
+            class="surah-page-box"></div>
+
+          <div class="pagination-controls">
+
+            <button id="prev-page-btn"
+              class="page-nav-btn">
+
+              السابق
+
+            </button>
+
+            <div id="page-indicator"
+              class="page-indicator-badge"></div>
+
+            <button id="next-page-btn"
+              class="page-nav-btn">
+
+              التالي
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- صفحة المطور -->
+
+    <div id="developer-page"
+      class="dashboard-view hidden">
+
+      <div class="developer-page-card">
+
+        <div class="developer-avatar">
+
+          <i class="fa-solid fa-code"></i>
+
+        </div>
+
+        <h1>
+          حسن فاضل
+        </h1>
+
+        <p>
+          مطور تطبيق آيات
+        </p>
+
+        <a href="https://www.instagram.com/"
+          target="_blank"
+          class="insta-link">
+
+          <i class="fa-brands fa-instagram"></i>
+
+          إنستغرام
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
